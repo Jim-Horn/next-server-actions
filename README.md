@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧪 Server Action Link Generator PoC
 
-## Getting Started
+A minimal proof-of-concept using **Next.js App Router** with **Server Actions**, **Styled Components**, and **TypeScript** — triggered by a form submission.
 
-First, run the development server:
+---
+
+## ✨ Functionality
+
+This app generates a random link server-side using a Server Action. It uses a hidden input in the form and stores the result on the client side after submission. The server-generated link is returned without using any client fetches.
+
+---
+
+## 🗂 Files of Interest
+
+-   `app/page.tsx`: Client component with the form and button
+-   `app/actions/submit-link.ts`: Server Action that receives FormData
+-   `app/actions/generate-link.ts`: Helper to generate a link (also a Server Action)
+-   `styled-components-registry.tsx`: Configures SSR for Styled Components
+-   `next.config.js`: Enables native `styledComponents` support in Next.js
+-   `page.module.css`: Responsive layout and theme styling (not applied in this PoC but included)
+
+---
+
+## 🛠️ Technologies Used
+
+-   Next.js 15 (App Router)
+-   React 19
+-   TypeScript
+-   Styled Components v6
+-   Server Actions (form-based, async)
+
+---
+
+## ▶️ How to Run
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✍️ Example Output
 
-## Learn More
+When clicking the button:
 
-To learn more about Next.js, take a look at the following resources:
+```
+https://example.com/link/sqt7c1-3cg8t6ia
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Each click generates a new unique link.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 💡 Notes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+-   `useEffect` is used to pre-generate the hidden input to avoid hydration mismatches
+-   Styled Components are configured for SSR with the `StyledComponentsRegistry`
+-   No client-side fetches — everything flows through the form + server action pattern
